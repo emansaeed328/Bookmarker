@@ -37,9 +37,12 @@ function Submit(){
     }
     else
     {
-        window.alert(`Site Name or Url is not valid, Please follow the rules below :
-        - Site name must contain at least 3 characters
-        - Site URL must be a valid one`);
+        // window.alert(`Site Name or Url is not valid, Please follow the rules below :
+        // - Site name must contain at least 3 characters
+        // - Site URL must be a valid one`);
+        var x = document.getElementById('Demo');
+        x.classList.replace('d-none','d-flex'); 
+        console.log(x);
         if(nameCheck == false)
         {BookmarkName.focus();
         BookmarkName.style.borderColor = 'red';}
@@ -48,11 +51,6 @@ function Submit(){
             BookmarkURL.focus();
             BookmarkURL.style.borderColor = 'red';
         }
-        
-
-        // var x = document.getElementById('Demo');
-        // x.style.removeProperty = 'd-none';
-        // console.log(x);
     }
 }
 function displaySites(){
@@ -104,7 +102,8 @@ function Close(){
 //     display = 1;
 // }
 var x = document.getElementById('Demo');
-    x.style.removeProperty ='d-none';
-    x.style.setProperty = 'd-flex';
+    x.classList.replace('d-flex','d-none');
+    // x.style.removeProperty ='d-none';
+    // x.style.setProperty = 'd-flex';
     console.log(x);
 }
