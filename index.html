@@ -35,16 +35,30 @@
           id="name"
           value=""
           placeholder="Bookmark Name"
+          onkeyup="CheckName(this.value)"
         />
+        <div id="name-valid" class="mb-2 d-none">
+          <label for="name" class="text-danger"
+            >*Please enter a vaild Name (Name must have at least 3
+            characters)*</label
+          >
+        </div>
         <i class="fa-solid fa-link pe-2"></i>
         <label for="url"> Site URL</label>
         <input
           class="form-control p-2 mt-3 mb-3"
           type="text"
           id="Url"
+          name="Url"
           value=""
           placeholder="Bookmark URL"
+          onkeyup="CheckUrl(this.value)"
         />
+        <div id="url-valid" class="mb-2 d-none">
+          <label for="Url" class="text-danger"
+            >*Please enter a vaild URL(URl like http://www.go.com )*</label
+          >
+        </div>
         <button
           onclick="Submit()"
           type="submit"
@@ -52,6 +66,14 @@
         >
           Submit
         </button>
+        <input
+          type="text"
+          name="search"
+          id="search"
+          onkeyup="search(this.value)"
+          class="form-control mt-4 mb-3"
+          placeholder="Write Sitename to Search"
+        />
         <div
           class="alert d-none bg-white w-50 m-auto flex-column position-absolute"
           id="Demo"

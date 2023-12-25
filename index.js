@@ -10,10 +10,55 @@ if(JSON.parse(localStorage.getItem('Sites')) != null){
     displaySites();
 }
 
+
+function CheckName(name){
+    nameCheck = /(.*[a-z]){3}/i.test(name);
+    if(nameCheck == true)
+    {
+        BookmarkName.style.borderColor = 'green'
+        document.getElementById('name-valid').classList.replace('d-flex','d-none');
+    }
+    else
+    {
+        BookmarkName.style.borderColor = 'red'
+        document.getElementById('name-valid').classList.replace('d-none','d-flex');
+    }
+    return nameCheck;
+}
+
+function CheckUrl(url){
+
+    urlCheck = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(url);
+    if(urlCheck == true)
+    {
+        BookmarkURL.style.borderColor = 'green'
+        document.getElementById('url-valid').classList.replace('d-flex','d-none');
+    }
+    else
+    {
+        BookmarkURL.style.borderColor = 'red'
+        document.getElementById('url-valid').classList.replace('d-none','d-flex');
+    }
+    return urlCheck;
+}
 function validate(name , url)
 {
     nameCheck = /(.*[a-z]){3}/i.test(name);
+    if(nameCheck ==true)
+    {
+        BookmarkName.style.borderColor = 'green'
+        document.getElementById('name-valid').classList.replace('d-flex','d-none');
+    }
+    else
+    {
+        document.getElementById('name-valid').classList.replace('d-none','d-flex');
+    }
     urlCheck = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(url);
+    if(urlCheck ==true)
+    {
+        BookmarkURL.style.borderColor = 'green'
+    }
+    
     if(nameCheck != true || urlCheck != true){
         return false;
     }
@@ -23,33 +68,56 @@ function validate(name , url)
     }
 
 }
+function checkDuplicate(name,url)
+{
+    var valid = false;
+for(var i = 0; i<list.length; i++)
+{
+    if(list[i].name.toLowerCase()==name.toLowerCase() && list[i].url.toLowerCase()== url.toLowerCase())
+    {
+        valid = false
+        window.alert('This site is already in your favourite list!')
+    }
+    else
+    {
+        valid = true
+    }
+}
+console.log(valid);
+return valid;
+}
 function Submit(){
-
-
-    if (validate(BookmarkName.value,BookmarkURL.value)){
+//CheckName()== true && urlCheck == true
+    // validate(BookmarkName.value,BookmarkURL.value
+    if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value,BookmarkURL.value)){
     var site = {
         name : BookmarkName.value,
         url  : BookmarkURL.value
     };
     list.push(site);
     localStorage.setItem('Sites',JSON.stringify(list));
+    BookmarkName.value = '';
+    BookmarkURL.value = '';
+    window.alert('Site added to your favorites');
     displaySites();
     }
     else
     {
-        // window.alert(`Site Name or Url is not valid, Please follow the rules below :
-        // - Site name must contain at least 3 characters
-        // - Site URL must be a valid one`);
         var x = document.getElementById('Demo');
         x.classList.replace('d-none','d-flex'); 
-        console.log(x);
         if(nameCheck == false)
         {BookmarkName.focus();
         BookmarkName.style.borderColor = 'red';}
-        else
+        else if(urlCheck == false)
         {
             BookmarkURL.focus();
             BookmarkURL.style.borderColor = 'red';
+        }
+        else
+        {
+            BookmarkName.focus();
+            BookmarkName.style.borderColor = 'red';
+
         }
     }
 }
@@ -89,21 +157,37 @@ function Visit(url)
     console.log(url);
         window.open(url,'__blank');
 }
+
+function search(name)
+{
+    var siteData= '';
+    for(var i = 0; i<list.length; i++)
+    {
+
+        if(list[i].name.toLowerCase().includes(name.toLowerCase()))
+        {
+            siteData += `<tr>
+            <td>${i+1}</td>
+            <td>${list[i].name}</td>
+            <td>
+              <button onclick="Visit('${list[i].url}')" class="btn bg-success text-white">
+                <i class="fa-regular fa-eye"></i> Visit
+              </button>
+            </td>
+            <td>
+              <button onclick="Delete(${i})" class="btn bg-danger text-white">
+                <i class="fa-solid fa-trash"></i> Delete
+              </button>
+            </td>
+          </tr>`
+        }  
+    }
+    document.getElementById('data').innerHTML = siteData;
+
+}
 function Close(){
-//    var x = document.getElementById('Demo').style.display = 'none';
-// if(display == 1)
-// {
-//     x.style.display = 'flex';
-//     display = 0;
-// }
-// else
-// {
-//     x.style.display = 'none';
-//     display = 1;
-// }
+
 var x = document.getElementById('Demo');
     x.classList.replace('d-flex','d-none');
-    // x.style.removeProperty ='d-none';
-    // x.style.setProperty = 'd-flex';
-    console.log(x);
+
 }

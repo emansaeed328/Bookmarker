@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:ital,wght@0,600;1,600&family=Pacifico&family=Playfair+Display:ital@1&family=Poppins:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Montserrat:wght@800&family=Open+Sans:ital,wght@0,600;1,600&family=PT+Sans+Caption&family=Pacifico&family=Playfair+Display:ital@1&family=Poppins:wght@400;700&family=Righteous&display=swap');
 
 body{
     background-color: #f7ecde;
@@ -36,7 +35,7 @@ h1:hover::after{
 .subHeader span{
     font-size: 25px;
     line-height: 30px;
-    font-weight: 700;
+    font-weight: 600;
     font-family: 'Righteous', sans-serif;
     background-image: linear-gradient(to right, #3ca55c, #b5ac49);
     -webkit-background-clip: text;
