@@ -70,20 +70,21 @@ function validate(name , url)
 }
 function checkDuplicate(name,url)
 {
-    var valid = false;
-for(var i = 0; i<list.length; i++)
-{
-    if(list[i].name.toLowerCase()==name.toLowerCase() && list[i].url.toLowerCase()== url.toLowerCase())
-    {
-        valid = false
-        window.alert('This site is already in your favourite list!')
+    var valid = true;
+    if(list.length != 0){
+        for(var i = 0; i<list.length; i++)
+        {
+            if( list[i].name.toLowerCase()==name.toLowerCase() && list[i].url.toLowerCase()== url.toLowerCase())
+            {
+                valid = false
+                window.alert('This site is already in your favourite list!')
+            }
+            else
+            {
+                valid = true
+            }
+        }
     }
-    else
-    {
-        valid = true
-    }
-}
-console.log(valid);
 return valid;
 }
 function Submit(){
