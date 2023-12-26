@@ -4,6 +4,7 @@ var BookmarkURL = document.getElementById('Url');
 var list = []
 var nameCheck ;
 var urlCheck;
+var update_index = -1 ;
 if(JSON.parse(localStorage.getItem('Sites')) != null){
 
     list = JSON.parse(localStorage.getItem('Sites'));
@@ -88,8 +89,7 @@ function checkDuplicate(name,url)
 return valid;
 }
 function Submit(){
-//CheckName()== true && urlCheck == true
-    // validate(BookmarkName.value,BookmarkURL.value
+
     if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value,BookmarkURL.value)){
     var site = {
         name : BookmarkName.value,
@@ -135,14 +135,61 @@ function displaySites(){
       </button>
     </td>
     <td>
+    <button onclick="Update(${i})" class="btn bg-secondary text-white">
+    <i class="fa-regular fa-pen-to-square"></i> Update
+    </button>
+    </td>
+    <td>
       <button onclick="Delete(${i})" class="btn bg-danger text-white">
         <i class="fa-solid fa-trash"></i> Delete
       </button>
+      
     </td>
   </tr>`
     }
 document.getElementById('data').innerHTML = siteData;
 
+}
+function Update(index){
+BookmarkName.value = list[index].name;
+BookmarkURL.value = list[index].url;
+document.getElementById('submit').classList.replace('d-flex','d-none');
+document.getElementById('Save').classList.replace('d-none','d-flex');
+update_index = index;
+
+}
+function Save(){
+    if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value,BookmarkURL.value)){
+
+        list[update_index].name = BookmarkName.value;
+        list[update_index].url = BookmarkURL.value;
+        localStorage.setItem('Sites',JSON.stringify(list));
+        BookmarkName.value = '';
+        BookmarkURL.value = '';
+        window.alert('Site Data Updated Successfully.');
+        displaySites();
+        }
+        else
+        {
+            var x = document.getElementById('Demo');
+            x.classList.replace('d-none','d-flex'); 
+            if(nameCheck == false)
+            {BookmarkName.focus();
+            BookmarkName.style.borderColor = 'red';}
+            else if(urlCheck == false)
+            {
+                BookmarkURL.focus();
+                BookmarkURL.style.borderColor = 'red';
+            }
+            else
+            {
+                BookmarkName.focus();
+                BookmarkName.style.borderColor = 'red';
+    
+            }
+        }
+    document.getElementById('Save').classList.replace('d-flex','d-none');
+document.getElementById('submit').classList.replace('d-none','d-flex');
 }
 
 function Delete(index){
@@ -174,6 +221,11 @@ function search(name)
               <button onclick="Visit('${list[i].url}')" class="btn bg-success text-white">
                 <i class="fa-regular fa-eye"></i> Visit
               </button>
+            </td>
+            <td>
+            <button onclick="Update(${i})" class="btn bg-secondary text-white">
+            <i class="fa-regular fa-pen-to-square"></i> Update
+            </button>
             </td>
             <td>
               <button onclick="Delete(${i})" class="btn bg-danger text-white">

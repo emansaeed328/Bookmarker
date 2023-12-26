@@ -61,10 +61,19 @@
         </div>
         <button
           onclick="Submit()"
+          id="submit"
           type="submit"
           class="btn text-white bg-danger d-flex m-auto py-2 px-5 mb-4 rounded"
         >
           Submit
+        </button>
+        <button
+          onclick="Save()"
+          id="Save"
+          type="submit"
+          class="btn d-none text-white bg-success d-flex m-auto py-2 px-5 mb-4 rounded"
+        >
+          Update
         </button>
         <input
           type="text"
@@ -108,6 +117,7 @@
             <td>Index</td>
             <td>Website Name</td>
             <td>Visit</td>
+            <td>Update</td>
             <td>Delete</td>
           </tr>
         </thead>
