@@ -67,14 +67,24 @@
         >
           Submit
         </button>
-        <button
-          onclick="Save()"
-          id="Save"
-          type="submit"
-          class="btn d-none text-white bg-success d-flex m-auto py-2 px-5 mb-4 rounded"
-        >
-          Update
-        </button>
+        <div class="update_btn d-flex justify-content-center">
+          <button
+            onclick="Save()"
+            id="Save"
+            type="submit"
+            class="btn d-none text-white bg-success d-flex py-2 px-5 mb-4 mx-3 rounded"
+          >
+            Update
+          </button>
+          <button
+            onclick="Cancel()"
+            id="cancel"
+            type="submit"
+            class="btn d-none text-white bg-secondary d-flex py-2 px-5 mb-4 rounded"
+          >
+            cancel
+          </button>
+        </div>
         <input
           type="text"
           name="search"
@@ -112,7 +122,7 @@
         </div>
       </div>
       <table class="table mt-3">
-        <thead class="text-center">
+        <thead class="text-center bg-danger-subtle">
           <tr>
             <td>Index</td>
             <td>Website Name</td>

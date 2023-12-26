@@ -155,6 +155,7 @@ BookmarkName.value = list[index].name;
 BookmarkURL.value = list[index].url;
 document.getElementById('submit').classList.replace('d-flex','d-none');
 document.getElementById('Save').classList.replace('d-none','d-flex');
+document.getElementById('cancel').classList.replace('d-none','d-flex');
 update_index = index;
 
 }
@@ -189,9 +190,18 @@ function Save(){
             }
         }
     document.getElementById('Save').classList.replace('d-flex','d-none');
-document.getElementById('submit').classList.replace('d-none','d-flex');
-}
+    document.getElementById('submit').classList.replace('d-none','d-flex');
 
+}
+function Cancel()
+{
+    BookmarkName.value = '';
+    BookmarkURL.value = '';
+    displaySites();
+    document.getElementById('Save').classList.replace('d-flex','d-none');
+    document.getElementById('cancel').classList.replace('d-flex','d-none');
+    document.getElementById('submit').classList.replace('d-none','d-flex');
+}
 function Delete(index){
 
     list.splice(index,1);
