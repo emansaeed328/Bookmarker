@@ -46,6 +46,7 @@ function CheckUrl(url){
 }
 function validate(name , url)
 {
+
     nameCheck = /(.*[a-z]){3}/i.test(name);
     if(nameCheck ==true)
     {
@@ -57,12 +58,13 @@ function validate(name , url)
         document.getElementById('name-valid').classList.replace('d-none','d-flex');
     }
     urlCheck = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(url);
-    if(urlCheck ==true)
+    if(urlCheck == true)
     {
         BookmarkURL.style.borderColor = 'green'
     }
     
     if(nameCheck != true || urlCheck != true){
+
         return false;
     }
     else
@@ -96,12 +98,7 @@ return valid;
 }
 function Submit(){
 
-    if(checkDuplicate(BookmarkName.value) == false)
-    {
-        window.alert('This site is already in your favourite list!')
-    }
-
-    if (validate(BookmarkName.value,BookmarkURL.value == false)){
+    if (validate(BookmarkName.value,BookmarkURL.value)== false){
         var x = document.getElementById('Demo');
         x.classList.replace('d-none','d-flex'); 
         if(nameCheck == false)
@@ -119,6 +116,10 @@ function Submit(){
 
         }
 
+    }
+    if(checkDuplicate(BookmarkName.value) == false)
+    {
+        window.alert('This site is already in your favourite list!')
     }
     if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value)){
     var site = {
@@ -178,12 +179,9 @@ update_index = index;
 
 function Save(){
     
-    if(checkDuplicate(BookmarkName.value) == false)
-    {
-        window.alert('This site is already in your favourite list!')
-    }
+    
 
-    if (validate(BookmarkName.value,BookmarkURL.value == false)){
+    if (validate(BookmarkName.value,BookmarkURL.value )== false){
         var x = document.getElementById('Demo');
         x.classList.replace('d-none','d-flex'); 
         if(nameCheck == false)
@@ -201,6 +199,10 @@ function Save(){
 
         }
 
+    }
+    if(checkDuplicate(BookmarkName.value) == false)
+    {
+        window.alert('This site is already in your favourite list!')
     }
     if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value)){
 
