@@ -95,21 +95,13 @@ function checkDuplicate(name)
 return valid;
 }
 function Submit(){
-console.log(checkDuplicate(BookmarkName.value))
-    if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value)){
-    var site = {
-        name : BookmarkName.value,
-        url  : BookmarkURL.value
-    };
-    list.push(site);
-    localStorage.setItem('Sites',JSON.stringify(list));
-    BookmarkName.value = '';
-    BookmarkURL.value = '';
-    window.alert('Site added to your favorites');
-    displaySites();
-    }
-    else
+
+    if(checkDuplicate(BookmarkName.value) == false)
     {
+        window.alert('This site is already in your favourite list!')
+    }
+
+    if (validate(BookmarkName.value,BookmarkURL.value == false)){
         var x = document.getElementById('Demo');
         x.classList.replace('d-none','d-flex'); 
         if(nameCheck == false)
@@ -123,9 +115,24 @@ console.log(checkDuplicate(BookmarkName.value))
         else
         {
             BookmarkName.focus();
+            BookmarkName.style.borderColor = 'red';
 
         }
+
     }
+    if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value)){
+    var site = {
+        name : BookmarkName.value,
+        url  : BookmarkURL.value
+    };
+    list.push(site);
+    localStorage.setItem('Sites',JSON.stringify(list));
+    BookmarkName.value = '';
+    BookmarkURL.value = '';
+    window.alert('Site added to your favorites');
+    displaySites();
+    }
+
 }
 
 function displaySites(){
@@ -170,10 +177,30 @@ update_index = index;
 
 
 function Save(){
-    console.log(checkDuplicate(BookmarkName.value,BookmarkURL.value));
+    
     if(checkDuplicate(BookmarkName.value) == false)
     {
         window.alert('This site is already in your favourite list!')
+    }
+
+    if (validate(BookmarkName.value,BookmarkURL.value == false)){
+        var x = document.getElementById('Demo');
+        x.classList.replace('d-none','d-flex'); 
+        if(nameCheck == false)
+        {BookmarkName.focus();
+        BookmarkName.style.borderColor = 'red';}
+        else if(urlCheck == false)
+        {
+            BookmarkURL.focus();
+            BookmarkURL.style.borderColor = 'red';
+        }
+        else
+        {
+            BookmarkName.focus();
+            BookmarkName.style.borderColor = 'red';
+
+        }
+
     }
     if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value)){
 
@@ -184,25 +211,6 @@ function Save(){
         BookmarkURL.value = '';
         window.alert('Site Data Updated Successfully.');
         displaySites();
-        }
-        else
-        {
-            var x = document.getElementById('Demo');
-            x.classList.replace('d-none','d-flex'); 
-            if(nameCheck == false)
-            {BookmarkName.focus();
-            BookmarkName.style.borderColor = 'red';}
-            else if(urlCheck == false)
-            {
-                BookmarkURL.focus();
-                BookmarkURL.style.borderColor = 'red';
-            }
-            else
-            {
-                BookmarkName.focus();
-                BookmarkName.style.borderColor = 'red';
-    
-            }
         }
     document.getElementById('Save').classList.replace('d-flex','d-none');
     document.getElementById('cancel').classList.replace('d-flex','d-none');
