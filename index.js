@@ -213,10 +213,11 @@ function Save(){
         BookmarkURL.value = '';
         window.alert('Site Data Updated Successfully.');
         displaySites();
-        }
-    document.getElementById('Save').classList.replace('d-flex','d-none');
+        document.getElementById('Save').classList.replace('d-flex','d-none');
     document.getElementById('cancel').classList.replace('d-flex','d-none');
     document.getElementById('submit').classList.replace('d-none','d-flex');
+        }
+    
 
 }
 function Cancel()
