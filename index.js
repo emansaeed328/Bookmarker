@@ -5,6 +5,8 @@ var list = []
 var nameCheck ;
 var urlCheck;
 var update_index = -1 ;
+
+
 if(JSON.parse(localStorage.getItem('Sites')) != null){
 
     list = JSON.parse(localStorage.getItem('Sites'));
@@ -69,16 +71,20 @@ function validate(name , url)
     }
 
 }
-function checkDuplicate(name,url)
+
+
+function checkDuplicate(name)
 {
     var valid = true;
     if(list.length != 0){
         for(var i = 0; i<list.length; i++)
         {
-            if( list[i].name.toLowerCase()==name.toLowerCase() && list[i].url.toLowerCase()== url.toLowerCase())
+
+            if( list[i].name.toLowerCase() == name.toLowerCase() )
             {
-                valid = false
-                window.alert('This site is already in your favourite list!')
+                valid = false;
+                break;
+                
             }
             else
             {
@@ -89,8 +95,8 @@ function checkDuplicate(name,url)
 return valid;
 }
 function Submit(){
-
-    if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value,BookmarkURL.value)){
+console.log(checkDuplicate(BookmarkName.value))
+    if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value)){
     var site = {
         name : BookmarkName.value,
         url  : BookmarkURL.value
@@ -117,11 +123,11 @@ function Submit(){
         else
         {
             BookmarkName.focus();
-            BookmarkName.style.borderColor = 'red';
 
         }
     }
 }
+
 function displaySites(){
 
     var siteData = '';
@@ -130,12 +136,12 @@ function displaySites(){
     <td>${i+1}</td>
     <td>${list[i].name}</td>
     <td>
-      <button onclick="Visit('${list[i].url}')" class="btn bg-success text-white">
+      <button onclick="Visit('${list[i].url}')" class="btn bg-secondary text-white">
         <i class="fa-regular fa-eye"></i> Visit
       </button>
     </td>
     <td>
-    <button onclick="Update(${i})" class="btn bg-secondary text-white">
+    <button onclick="Update(${i})" class="btn bg-success text-white">
     <i class="fa-regular fa-pen-to-square"></i> Update
     </button>
     </td>
@@ -150,6 +156,8 @@ function displaySites(){
 document.getElementById('data').innerHTML = siteData;
 
 }
+
+
 function Update(index){
 BookmarkName.value = list[index].name;
 BookmarkURL.value = list[index].url;
@@ -159,8 +167,15 @@ document.getElementById('cancel').classList.replace('d-none','d-flex');
 update_index = index;
 
 }
+
+
 function Save(){
-    if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value,BookmarkURL.value)){
+    console.log(checkDuplicate(BookmarkName.value,BookmarkURL.value));
+    if(checkDuplicate(BookmarkName.value) == false)
+    {
+        window.alert('This site is already in your favourite list!')
+    }
+    if (validate(BookmarkName.value,BookmarkURL.value) && checkDuplicate(BookmarkName.value)){
 
         list[update_index].name = BookmarkName.value;
         list[update_index].url = BookmarkURL.value;
@@ -190,6 +205,7 @@ function Save(){
             }
         }
     document.getElementById('Save').classList.replace('d-flex','d-none');
+    document.getElementById('cancel').classList.replace('d-flex','d-none');
     document.getElementById('submit').classList.replace('d-none','d-flex');
 
 }
@@ -197,11 +213,14 @@ function Cancel()
 {
     BookmarkName.value = '';
     BookmarkURL.value = '';
+    BookmarkName.style.borderColor = 'green';
     displaySites();
     document.getElementById('Save').classList.replace('d-flex','d-none');
     document.getElementById('cancel').classList.replace('d-flex','d-none');
     document.getElementById('submit').classList.replace('d-none','d-flex');
 }
+
+
 function Delete(index){
 
     list.splice(index,1);
@@ -211,8 +230,6 @@ function Delete(index){
 
 function Visit(url)
 {
-    console.log(url);
-    console.log(url);
         window.open(url,'__blank');
 }
 
@@ -248,6 +265,7 @@ function search(name)
     document.getElementById('data').innerHTML = siteData;
 
 }
+
 function Close(){
 
 var x = document.getElementById('Demo');
